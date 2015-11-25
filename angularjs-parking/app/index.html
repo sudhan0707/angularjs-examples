@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="parkingApp">
+<head>
+	<meta charset="UTF-8">
+	<title>angularjs-parking</title>
+</head>
+<body ng-controller="parkingCtrl">
+		
+	<input type="text" ng-model="doSomething">
+
+	<h1>Value :: {{doSomething}}</h1>
+
+	<h1>IS Parking</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>SL #</th>
+				<th>Plate #</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="vehicle in cars">
+				<td>{{$index}}</td>
+				<td>{{vehicle.plate | hyphenCasing:'@'}}</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<form name="carForm">
+		<label >Enter Plate #</label>
+		<input 
+			type="text"
+			name="plate"
+			ng-model="car.plate"
+			ng-required="true"
+			ng-pattern="/^[a-zA-Z0-9]+$/"
+			ng-maxlength="8"
+			ng-minlength="7">
+		
+		<button ng-click="save(car)" ng-disabled="carForm.$invalid">Save</button>
+	</form>
+	<alert ng-show="carForm.plate.$invalid">
+		Plate # is invalid !!!
+	</alert>
+	<script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+	<script type="text/javascript" src="scripts/app.js"></script>
+	<script type="text/javascript" src="scripts/controllers.js"></script>
+	<script type="text/javascript" src="scripts/filters.js"></script>
+</body>
+</html>
